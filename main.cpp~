@@ -1,0 +1,99 @@
+#include <cstdio>
+#include <string>
+#include <iostream>
+#include "civicCard.h"
+#include <stdlib.h>
+//#include <conio.h> 
+using namespace std;
+int main( void ){
+	system("clear");
+	char key;
+	int option = 0;	
+	bool added = false;
+	CivicCard civicCard2("no name","no dni",0,0,false);
+	/*CivicCard maracu = civicCard("no name","no dni",0,0,false);
+	CivicCard h[2];
+	h[0]=CivicCard("Jose","123456789",1,5000,true);
+	h[1]=CivicCard("Carlos","123456789",1,5000,true);*/		
+	do{
+		while(option != 6){
+			cout << "----MENU--" <<endl;
+			cout << "1 Update user information"<<endl;
+			cout << "2 Print user"<<endl;
+			cout << "3 Add balance"<<endl;
+			cout << "4 reduce balance"<<endl;
+			cout << "5 change user state"<<endl;
+			cout << "6 EXIT"<<endl;
+			do{		
+				cout << "Enter your option: "<<endl;
+				scanf("%d",&option);
+			}while((option<1) || (option>6));
+			//cout << "here we go";
+			string newname,newdni;
+			int newid;
+			float newbalance;
+			if(option != 6){
+				switch(option){
+					case 1:
+						if(added == false){
+						added = true;
+						cout << "------NEW USER------" << endl << "Enter the name:" << endl;
+						cin >> newname;
+						cout << "Enter the DNI:" << endl;
+						cin >> newdni;
+						cout << "Enter the ID CARD:" << endl;
+						cin >> newid;
+						cout << "Enter the initial balance" << endl;
+						cin >> newbalance;
+						civicCard2.updateInfo(newname,newdni,newid,newbalance,true);
+						}else{
+	
+						cout << "------UPDATE USER INFORMATION------" << endl << "Enter the name:" << endl;
+						cin >> newname;
+						cout << "Enter the DNI:" << endl;
+						cin >> newdni;
+						cout << "Enter the ID CARD:" << endl;
+						cin >> newid;
+						civicCard2.updateInfo(newname,newdni,newid);
+						}
+						break;
+					case 2:
+						civicCard2.printUser();
+						break;
+					case 3:
+						civicCard2.addBalance();
+						break;
+					case 4:
+
+						civicCard2.reduceBalance();
+						break;
+					default:
+						if(added==true){
+							civicCard2.enableCard(!civicCard2.getStatus());
+						}else{
+			cout << "please, first update the user information"<<endl;
+												
+						}
+						break;
+			
+				}
+				//getchar ();
+				cout<< "Enter any key to continue...";
+				
+				
+				//do{
+				cin >> key;
+				//}while (key !='\n'); 
+				system("clear");
+			}else{
+				return 0;
+			}
+		}
+	}while(true);
+	
+}
+
+//$ g++ -Wall prac1.cpp -o prac1.out
+//$ ./prac1.out
+//g++ -c archivo.cpp para compilar un no main
+//g++ main.cpp archivo.o ... para compilar completo
